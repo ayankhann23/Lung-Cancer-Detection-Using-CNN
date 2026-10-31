@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Create Account | LungCare AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body class="auth-body">
+
+<div class="auth-page">
+
+    <div class="auth-visual">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="auth-brand"
+        >
+            🫁 LungCare <b>AI</b>
+        </a>
+
+        <div class="auth-visual-content">
+
+            <span>
+                LUNGCARE AI
+            </span>
+
+            <h1>
+                Your AI-assisted
+                analysis workspace.
+            </h1>
+
+            <p>
+                Create an account to analyze images
+                and keep your prediction history.
+            </p>
+
+            <div class="auth-feature-list">
+
+                <div>✓ ResNet18 classification</div>
+                <div>✓ Three-class prediction</div>
+                <div>✓ Prediction history</div>
+                <div>✓ Performance analytics</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="auth-form-area">
+
+        <div class="auth-card">
+
+            <div class="auth-heading">
+
+                <span>
+                    GET STARTED
+                </span>
+
+                <h2>
+                    Create your account
+                </h2>
+
+                <p>
+                    Set up your LungCare AI workspace.
+                </p>
+
+            </div>
+
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% for category, message in messages %}
+
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endwith %}
+
+
+            <form
+                method="POST"
+                class="auth-form"
+            >
+
+                <label>
+                    Username
+                </label>
+
+                <div class="input-wrapper">
+                    <span>👤</span>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Choose a username"
+                        required
+                    >
+                </div>
+
+
+                <label>
+                    Email
+                </label>
+
+                <div class="input-wrapper">
+                    <span>✉</span>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        required
+                    >
+                </div>
+
+
+                <label>
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+                    <span>🔒</span>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create a password"
+                        required
+                    >
+                </div>
+
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <div class="input-wrapper">
+                    <span>✓</span>
+
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        placeholder="Repeat your password"
+                        required
+                    >
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+                    Create Account
+                    →
+                </button>
+
+            </form>
+
+
+            <div class="auth-switch">
+
+                Already have an account?
+
+                <a href="{{ url_for('login') }}">
+                    Sign in
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

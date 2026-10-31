@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+
+{% block title %}
+New Analysis | LungCare AI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-container narrow">
+
+```
+<div class="analysis-header">
+
+    <span class="eyebrow dark">
+        IMAGE ANALYSIS
+    </span>
+
+    <h1>
+        Analyze a lung image
+    </h1>
+
+    <p>
+        Upload an image to receive an AI-assisted
+        three-class classification.
+    </p>
+
+</div>
+
+
+<form
+    action="{{ url_for('predict') }}"
+    method="POST"
+    enctype="multipart/form-data"
+    id="predictionForm"
+>
+
+    <div
+        class="upload-card"
+        id="dropZone"
+    >
+
+        <input
+            type="file"
+            name="image"
+            id="imageInput"
+            accept=".jpg,.jpeg,.png,.bmp"
+            hidden
+            required
+        >
+
+
+        <div
+            class="upload-empty"
+            id="uploadEmpty"
+        >
+
+            <div class="upload-big-icon">
+                🫁
+            </div>
+
+            <h2>
+                Drop your image here
+            </h2>
+
+            <p>
+                or select an image from your computer
+            </p>
+
+            <button
+                type="button"
+                class="primary-button"
+                id="chooseImage"
+            >
+                Choose image
+            </button>
+
+            <span class="upload-formats">
+                JPG · JPEG · PNG · BMP
+                <br>
+                Maximum file size: 16 MB
+            </span>
+
+        </div>
+
+
+        <div
+            class="upload-preview"
+            id="uploadPreview"
+            style="display:none;"
+        >
+
+            <div class="preview-image-container">
+
+                <img
+                    id="previewImage"
+                    src=""
+                    alt="Selected image"
+                >
+
+            </div>
+
+
+            <div class="preview-information">
+
+                <span class="card-kicker">
+                    SELECTED IMAGE
+                </span>
+
+                <h3 id="fileName">
+                    Image
+                </h3>
+
+                <p id="fileDetails">
+                    Image ready for analysis
+                </p>
+
+
+                <button
+                    type="button"
+                    class="text-button"
+                    id="changeImage"
+                >
+                    Choose a different image
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="analysis-info-grid">
+
+        <div class="info-mini-card">
+
+            <span class="mini-icon">
+                01
+            </span>
+
+            <div>
+
+                <strong>
+                    Upload
+                </strong>
+
+                <p>
+                    Select a suitable lung image.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-mini-card">
+
+            <span class="mini-icon">
+                02
+            </span>
+
+            <div>
+
+                <strong>
+                    Analyze
+                </strong>
+
+                <p>
+                    ResNet18 processes the image.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-mini-card">
+
+            <span class="mini-icon">
+                03
+            </span>
+
+            <div>
+
+                <strong>
+                    Review
+                </strong>
+
+                <p>
+                    Explore prediction probabilities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="analysis-actions">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="secondary-button"
+        >
+            Cancel
+        </a>
+
+        <button
+            type="submit"
+            class="primary-button large-button"
+            id="analyzeButton"
+        >
+            <span>
+                Analyze image
+            </span>
+
+            <span>
+                →
+            </span>
+        </button>
+
+    </div>
+
+</form>
+
+
+<div class="medical-disclaimer-box">
+
+    <span>
+        ⓘ
+    </span>
+
+    <div>
+
+        <strong>
+            Before you continue
+        </strong>
+
+        <p>
+            This application is a machine-learning
+            demonstration. Its predictions are not
+            medical diagnoses and should not be used
+            to make healthcare decisions.
+        </p>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

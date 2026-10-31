@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Model Performance | LungCare AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-shell">
+
+
+    <aside class="sidebar">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="sidebar-brand"
+        >
+
+            <span class="sidebar-logo">
+                🫁
+            </span>
+
+            <span>
+
+                <strong>
+                    LungCare
+                </strong>
+
+                <small>
+                    AI ANALYTICS
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                WORKSPACE
+            </span>
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="side-link"
+            >
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a
+                href="{{ url_for('dashboard') }}#analyze"
+                class="side-link"
+            >
+                <span>⌕</span>
+                Analyze Scan
+            </a>
+
+            <a
+                href="{{ url_for('history') }}"
+                class="side-link"
+            >
+                <span>◷</span>
+                Prediction History
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                INSIGHTS
+            </span>
+
+            <a
+                href="{{ url_for('performance') }}"
+                class="side-link active"
+            >
+                <span>◈</span>
+                Model Performance
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="model-online">
+
+            <span class="online-dot"></span>
+
+            <div>
+
+                <strong>
+                    Model Online
+                </strong>
+
+                <small>
+                    ResNet18 • 3 classes
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout-link"
+        >
+            ⇥ Sign Out
+        </a>
+
+    </aside>
+
+
+    <main class="dashboard-main">
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="topbar-kicker">
+                    LUNGCARE AI
+                </span>
+
+                <h1>
+                    Model Performance
+                </h1>
+
+            </div>
+
+        </header>
+
+
+        <section class="page-intro">
+
+            <span>
+                MODEL PERFORMANCE ANALYTICS
+            </span>
+
+            <h2>
+                ResNet18 evaluation
+            </h2>
+
+            <p>
+                Evaluation metrics from the trained
+                three-class lung image classifier.
+            </p>
+
+        </section>
+
+
+        <!-- BIG METRICS -->
+
+        <section class="performance-metrics">
+
+            <div class="performance-main-card">
+
+                <span>
+                    VALIDATION ACCURACY
+                </span>
+
+                <strong>
+                    98.17%
+                </strong>
+
+                <p>
+                    161 correct predictions
+                    out of 164 validation images.
+                </p>
+
+                <div class="large-progress">
+
+                    <span style="width:98.17%"></span>
+
+                </div>
+
+            </div>
+
+
+            <div class="performance-small-card">
+
+                <span>
+                    VALIDATION SAMPLES
+                </span>
+
+                <strong>
+                    164
+                </strong>
+
+            </div>
+
+
+            <div class="performance-small-card">
+
+                <span>
+                    TEST SAMPLES
+                </span>
+
+                <strong>
+                    166
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- CLASS METRICS -->
+
+        <section class="performance-section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span>
+                        CLASSIFICATION METRICS
+                    </span>
+
+                    <h2>
+                        Precision, recall & F1-score
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="metric-table">
+
+                <div class="metric-head">
+
+                    <span>
+                        CLASS
+                    </span>
+
+                    <span>
+                        PRECISION
+                    </span>
+
+                    <span>
+                        RECALL
+                    </span>
+
+                    <span>
+                        F1-SCORE
+                    </span>
+
+                    <span>
+                        SUPPORT
+                    </span>
+
+                </div>
+
+
+                <div class="metric-row">
+
+                    <strong>
+                        Benign
+                    </strong>
+
+                    <span>
+                        94.44%
+                    </span>
+
+                    <span>
+                        94.44%
+                    </span>
+
+                    <span>
+                        94.44%
+                    </span>
+
+                    <span>
+                        18
+                    </span>
+
+                </div>
+
+
+                <div class="metric-row">
+
+                    <strong>
+                        Malignant
+                    </strong>
+
+                    <span>
+                        98.82%
+                    </span>
+
+                    <span>
+                        100.00%
+                    </span>
+
+                    <span>
+                        99.41%
+                    </span>
+
+                    <span>
+                        84
+                    </span>
+
+                </div>
+
+
+                <div class="metric-row">
+
+                    <strong>
+                        Normal
+                    </strong>
+
+                    <span>
+                        98.36%
+                    </span>
+
+                    <span>
+                        96.77%
+                    </span>
+
+                    <span>
+                        97.56%
+                    </span>
+
+                    <span>
+                        62
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="performance-section">
+
+    <div class="section-title">
+        <div>
+            <span>MODEL INSIGHTS</span>
+            <h2>Classification performance</h2>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <h3>Precision, Recall & F1</h3>
+                    <p>Performance across all three classes</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="classMetricsChart"></canvas>
+            </div>
+
+        </div>
+
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <h3>Class Distribution</h3>
+                    <p>Validation samples by class</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="classDistributionChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+        <section class="performance-section">
+
+    <div class="section-title">
+        <div>
+            <span>MODEL DIAGNOSTICS</span>
+            <h2>Prediction analysis</h2>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <h3>Confusion Matrix</h3>
+                    <p>Actual vs predicted classifications</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="confusionMatrixChart"></canvas>
+            </div>
+
+        </div>
+
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <h3>Correct vs Incorrect</h3>
+                    <p>Validation prediction accuracy</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="predictionAccuracyChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+          <section class="performance-section">
+
+    <div class="chart-card">
+
+        <div class="chart-header">
+            <div>
+                <h3>Overall Model Profile</h3>
+                <p>Comparison of key evaluation metrics</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="modelProfileChart"></canvas>
+        </div>
+
+    </div>
+
+</section>
+
+        <!-- CONFUSION MATRIX -->
+
+        <section class="performance-section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span>
+                        CONFUSION MATRIX
+                    </span>
+
+                    <h2>
+                        Validation predictions
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="confusion-layout">
+
+                <div class="confusion-card">
+
+                    <div class="matrix-label">
+                        ACTUAL ↓ / PREDICTED →
+                    </div>
+
+
+                    <div class="confusion-matrix">
+
+                        <div></div>
+
+                        <div class="matrix-axis">
+                            B
+                        </div>
+
+                        <div class="matrix-axis">
+                            M
+                        </div>
+
+                        <div class="matrix-axis">
+                            N
+                        </div>
+
+
+                        <div class="matrix-axis">
+                            B
+                        </div>
+
+                        <div class="matrix-cell strong">
+                            17
+                        </div>
+
+                        <div class="matrix-cell">
+                            0
+                        </div>
+
+                        <div class="matrix-cell light">
+                            1
+                        </div>
+
+
+                        <div class="matrix-axis">
+                            M
+                        </div>
+
+                        <div class="matrix-cell">
+                            0
+                        </div>
+
+                        <div class="matrix-cell strongest">
+                            84
+                        </div>
+
+                        <div class="matrix-cell">
+                            0
+                        </div>
+
+
+                        <div class="matrix-axis">
+                            N
+                        </div>
+
+                        <div class="matrix-cell light">
+                            1
+                        </div>
+
+                        <div class="matrix-cell light">
+                            1
+                        </div>
+
+                        <div class="matrix-cell strong">
+                            60
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="performance-note">
+
+                    <div class="note-icon">
+                        ✓
+                    </div>
+
+                    <h3>
+                        Strong validation performance
+                    </h3>
+
+                    <p>
+                        The validation set contained 164
+                        images, with 161 correctly classified
+                        and 3 incorrectly classified.
+                    </p>
+
+                    <div class="note-stat">
+
+                        <strong>
+                            3
+                        </strong>
+
+                        <span>
+                            incorrect predictions
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MODEL INFO -->
+
+        <section class="model-info-grid">
+
+            <div class="model-info-card">
+
+                <span>
+                    ARCHITECTURE
+                </span>
+
+                <strong>
+                    ResNet18
+                </strong>
+
+                <p>
+                    ImageNet-pretrained convolutional
+                    neural network adapted for three-class
+                    lung image classification.
+                </p>
+
+            </div>
+
+
+            <div class="model-info-card">
+
+                <span>
+                    INPUT
+                </span>
+
+                <strong>
+                    224 × 224 × 3
+                </strong>
+
+                <p>
+                    RGB images are resized and normalized
+                    before inference.
+                </p>
+
+            </div>
+
+
+            <div class="model-info-card">
+
+                <span>
+                    OUTPUT
+                </span>
+
+                <strong>
+                    3 Classes
+                </strong>
+
+                <p>
+                    Benign, Malignant and Normal
+                    probability distribution.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <div class="medical-disclaimer">
+
+            <strong>
+                Interpretation:
+            </strong>
+
+            These metrics describe the performance of
+            this trained research model on the evaluated
+            dataset. They do not establish clinical accuracy.
+
+        </div>
+
+    </main>
+
+</div>
+
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

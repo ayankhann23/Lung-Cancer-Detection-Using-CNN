@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Prediction Result | LungCare AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body class="dashboard-body">
+
+<div class="dashboard-shell">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="sidebar-brand"
+        >
+
+            <span class="sidebar-logo">
+                🫁
+            </span>
+
+            <span>
+
+                <strong>
+                    LungCare
+                </strong>
+
+                <small>
+                    AI ANALYTICS
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                WORKSPACE
+            </span>
+
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="side-link"
+            >
+
+                <span>⌂</span>
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="{{ url_for('dashboard') }}#analyze"
+                class="side-link"
+            >
+
+                <span>⌕</span>
+                Analyze Scan
+
+            </a>
+
+
+            <a
+                href="{{ url_for('history') }}"
+                class="side-link"
+            >
+
+                <span>◷</span>
+                Prediction History
+
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                INSIGHTS
+            </span>
+
+
+            <a
+                href="{{ url_for('performance') }}"
+                class="side-link"
+            >
+
+                <span>◈</span>
+                Model Performance
+
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="model-online">
+
+            <span class="online-dot"></span>
+
+            <div>
+
+                <strong>
+                    Model Online
+                </strong>
+
+                <small>
+                    ResNet18 • 3 classes
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout-link"
+        >
+
+            ⇥ Sign Out
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="topbar-kicker">
+                    LUNGCARE AI
+                </span>
+
+                <h1>
+                    Prediction Result
+                </h1>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('dashboard') }}#analyze"
+                class="analyze-button small-button"
+            >
+
+                + New Analysis
+
+            </a>
+
+        </header>
+
+
+
+        <!-- INTRO -->
+
+        <section class="page-intro">
+
+            <span>
+                AI ANALYSIS COMPLETE
+            </span>
+
+            <h2>
+                Lung image classification result
+            </h2>
+
+            <p>
+                Your uploaded image has been analyzed
+                using the trained ResNet18 model.
+            </p>
+
+        </section>
+
+
+
+        <!-- RESULT CARD -->
+
+        <section class="prediction-result-card">
+
+
+            <!-- IMAGE -->
+
+            <div class="prediction-image-section">
+
+                <span class="result-label">
+                    ANALYZED IMAGE
+                </span>
+
+
+                <div class="prediction-image-wrapper">
+
+                    <img
+                        src="{{ url_for('uploaded_file', filename=image_filename) }}"
+                        alt="Analyzed lung image"
+                        class="prediction-image"
+                    >
+
+                </div>
+
+
+                <p class="prediction-filename">
+                    {{ image_filename }}
+                </p>
+
+            </div>
+
+
+
+            <!-- RESULT -->
+
+            <div class="prediction-details">
+
+                <span class="result-label">
+                    PREDICTION
+                </span>
+
+
+                <div class="prediction-class">
+
+                    {% if result.prediction == "Bengin cases" %}
+
+                        <span class="result-icon safe">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <span class="result-category">
+                                Classification
+                            </span>
+
+                            <h2>
+                                Benign
+                            </h2>
+
+                        </div>
+
+
+                    {% elif result.prediction == "Malignant cases" %}
+
+                        <span class="result-icon danger">
+                            !
+                        </span>
+
+                        <div>
+
+                            <span class="result-category">
+                                Classification
+                            </span>
+
+                            <h2>
+                                Malignant
+                            </h2>
+
+                        </div>
+
+
+                    {% else %}
+
+                        <span class="result-icon normal">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <span class="result-category">
+                                Classification
+                            </span>
+
+                            <h2>
+                                Normal
+                            </h2>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- CONFIDENCE -->
+
+                <div class="prediction-confidence">
+
+                    <div class="confidence-header">
+
+                        <span>
+                            MODEL CONFIDENCE
+                        </span>
+
+                        <strong>
+                            {{ "%.2f"|format(result.confidence|float) }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="large-progress">
+
+                        <span
+                            style="width: {{ result.confidence|float }}%;"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROBABILITIES -->
+
+                <div class="probability-section">
+
+                    <span class="result-label">
+                        CLASS PROBABILITIES
+                    </span>
+
+
+                    <div class="probability-row">
+
+                        <div>
+
+                            <span>
+                                Benign
+                            </span>
+
+                            <strong>
+                                {{ "%.2f"|format(result.benign|float) }}%
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-progress">
+
+                            <span
+                                style="width: {{ result.benign|float }}%;"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="probability-row">
+
+                        <div>
+
+                            <span>
+                                Malignant
+                            </span>
+
+                            <strong>
+                                {{ "%.2f"|format(result.malignant|float) }}%
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-progress">
+
+                            <span
+                                style="width: {{ result.malignant|float }}%;"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="probability-row">
+
+                        <div>
+
+                            <span>
+                                Normal
+                            </span>
+
+                            <strong>
+                                {{ "%.2f"|format(result.normal|float) }}%
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-progress">
+
+                            <span
+                                style="width: {{ result.normal|float }}%;"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+<!-- AI INSIGHT & GUIDANCE -->
+
+{% if prediction == "Malignant cases" %}
+
+<div class="prediction-advice malignant">
+
+    <div class="prediction-advice-header">
+
+        <div class="prediction-advice-icon">
+            !
+        </div>
+
+        <div>
+            <h3 class="prediction-advice-title">
+                AI Insight & Guidance
+            </h3>
+
+            <div class="prediction-advice-subtitle">
+                Important information about this result
+            </div>
+        </div>
+
+    </div>
+
+    <p>
+        The AI model has classified this image as
+        <strong>Malignant</strong> with the displayed confidence.
+        This result should be treated as an AI-assisted prediction
+        rather than a confirmed medical diagnosis. If this result
+        is being reviewed for a real health concern, the image
+        should be evaluated by a qualified healthcare professional
+        who can consider the complete clinical context.
+    </p>
+
+    <div class="prediction-advice-note">
+        <span>💡 Remember:</span>
+        AI results are intended for research and educational use
+        and should not replace professional medical evaluation.
+    </div>
+
+</div>
+
+
+{% elif prediction == "Bengin cases" %}
+
+<div class="prediction-advice benign">
+
+    <div class="prediction-advice-header">
+
+        <div class="prediction-advice-icon">
+            ✓
+        </div>
+
+        <div>
+            <h3 class="prediction-advice-title">
+                AI Insight & Guidance
+            </h3>
+
+            <div class="prediction-advice-subtitle">
+                Understanding your classification result
+            </div>
+        </div>
+
+    </div>
+
+    <p>
+        The AI model has classified this image as
+        <strong>Benign</strong> with the displayed confidence.
+        While this classification may indicate that the image
+        does not match the malignant patterns learned by the
+        model, an AI prediction cannot confirm a person's health
+        status on its own. For real medical concerns, professional
+        evaluation and appropriate clinical testing remain important.
+    </p>
+
+    <div class="prediction-advice-note">
+        <span>💡 Remember:</span>
+        This prediction is provided for research and educational
+        purposes and should not be considered a medical diagnosis.
+    </div>
+
+</div>
+
+
+{% else %}
+
+<div class="prediction-advice normal">
+
+    <div class="prediction-advice-header">
+
+        <div class="prediction-advice-icon">
+            ✓
+        </div>
+
+        <div>
+            <h3 class="prediction-advice-title">
+                AI Insight & Guidance
+            </h3>
+
+            <div class="prediction-advice-subtitle">
+                Understanding your classification result
+            </div>
+        </div>
+
+    </div>
+
+    <p>
+        The AI model has classified this image as
+        <strong>Normal</strong> with the displayed confidence.
+        This means the image was classified within the normal
+        category according to the patterns learned during model
+        training. However, an AI classification cannot determine
+        a person's overall health or rule out every possible
+        condition.
+    </p>
+
+    <div class="prediction-advice-note">
+        <span>💡 Remember:</span>
+        AI predictions are intended for research and educational
+        purposes and should not replace professional medical advice.
+    </div>
+
+</div>
+
+{% endif %}
+
+        <!-- ACTIONS -->
+
+        <section class="result-actions">
+
+            <a
+                href="{{ url_for('dashboard') }}#analyze"
+                class="analyze-button"
+            >
+
+                Analyze Another Image
+                <span>→</span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('history') }}"
+                class="secondary-button"
+            >
+
+                View Prediction History
+
+            </a>
+
+        </section>
+
+
+
+        <!-- DISCLAIMER -->
+
+        <div class="medical-disclaimer">
+
+            <strong>
+                Research Notice:
+            </strong>
+
+            This prediction is generated by a
+            machine-learning model for educational
+            and research purposes. It is not a
+            medical diagnosis and should not replace
+            evaluation by a qualified healthcare professional.
+
+        </div>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

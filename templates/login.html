@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Sign In | LungCare AI
+</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+```
+
+</head>
+
+<body class="auth-body">
+
+<div class="auth-page">
+
+```
+<!-- LEFT VISUAL SECTION -->
+
+<div class="auth-visual">
+
+    <a
+        href="{{ url_for('home') }}"
+        class="auth-brand"
+    >
+        🫁 LungCare <b>AI</b>
+    </a>
+
+
+    <div class="auth-visual-content">
+
+        <span>
+            LUNGCARE AI
+        </span>
+
+        <h1>
+            Intelligent lung
+            image analysis.
+        </h1>
+
+        <p>
+            Sign in to access your AI-assisted
+            lung image classification workspace.
+        </p>
+
+
+        <div class="auth-feature-list">
+
+            <div>
+                ✓ ResNet18 classification
+            </div>
+
+            <div>
+                ✓ Three-class prediction
+            </div>
+
+            <div>
+                ✓ Prediction history
+            </div>
+
+            <div>
+                ✓ Model performance analytics
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- RIGHT LOGIN SECTION -->
+
+<div class="auth-form-area">
+
+    <div class="auth-card">
+
+        <div class="auth-heading">
+
+            <span>
+                WELCOME BACK
+            </span>
+
+            <h2>
+                Sign in to LungCare AI
+            </h2>
+
+            <p>
+                Enter your credentials to continue
+                to your analysis workspace.
+            </p>
+
+        </div>
+
+
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% for category, message in messages %}
+
+                <div class="alert {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endwith %}
+
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            method="POST"
+            action="{{ url_for('login') }}"
+            class="auth-form"
+        >
+
+            <label>
+                Username
+            </label>
+
+            <div class="input-wrapper">
+
+                <span>
+                    👤
+                </span>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+
+            <label>
+                Password
+            </label>
+
+            <div class="input-wrapper">
+
+                <span>
+                    🔒
+                </span>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="auth-submit"
+            >
+                Sign In
+                →
+            </button>
+
+        </form>
+
+
+
+        <!-- REGISTER LINK -->
+
+        <div class="auth-switch">
+
+            Don't have an account?
+
+            <a href="{{ url_for('register') }}">
+                Create an account
+            </a>
+
+        </div>
+
+
+
+        <!-- BACK TO HOME -->
+
+        <div class="auth-back">
+
+            <a href="{{ url_for('home') }}">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+</body>
+
+</html>

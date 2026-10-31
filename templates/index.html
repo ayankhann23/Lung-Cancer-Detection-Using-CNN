@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        LungCare AI | Lung Cancer Detection
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body class="landing-body">
+
+<header class="landing-nav">
+
+    <a
+        href="{{ url_for('home') }}"
+        class="landing-brand"
+    >
+
+        <span class="brand-mark">
+            🫁
+        </span>
+
+        <span>
+            LungCare <b>AI</b>
+        </span>
+
+    </a>
+
+    <div class="landing-links">
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#workflow">
+            How It Works
+        </a>
+
+        <a
+            href="{{ url_for('login') }}"
+            class="nav-login"
+        >
+            Sign In
+        </a>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            AI-POWERED MEDICAL IMAGE ANALYSIS
+        </div>
+
+        <h1>
+            Lung Cancer Detection
+            <span>and Classification</span>
+        </h1>
+
+        <p>
+            An advanced deep-learning system designed
+            to classify lung images into Benign,
+            Malignant, and Normal categories.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="{{ url_for('login') }}"
+                class="primary-button"
+            >
+                Start Analysis
+                <span>→</span>
+            </a>
+
+            <a
+                href="#workflow"
+                class="secondary-button"
+            >
+                Explore System
+            </a>
+
+        </div>
+
+        <div class="hero-trust">
+
+            <div>
+                <strong>98.17%</strong>
+                <span>Validation Accuracy</span>
+            </div>
+
+            <div class="trust-divider"></div>
+
+            <div>
+                <strong>3</strong>
+                <span>Classification Classes</span>
+            </div>
+
+            <div class="trust-divider"></div>
+
+            <div>
+                <strong>ResNet18</strong>
+                <span>Deep Learning Model</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="scan-card">
+
+            <div class="scan-header">
+
+                <span class="live-dot"></span>
+
+                AI ANALYSIS SYSTEM
+
+                <span class="scan-menu">•••</span>
+
+            </div>
+
+            <div class="lung-illustration">
+
+                <div class="lung-glow"></div>
+
+                <div class="lung-symbol">
+                    🫁
+                </div>
+
+                <div class="scan-line"></div>
+
+            </div>
+
+            <div class="scan-status">
+
+                <div>
+
+                    <span class="small-label">
+                        SYSTEM STATUS
+                    </span>
+
+                    <strong>
+                        Model Ready
+                    </strong>
+
+                </div>
+
+                <span class="online-badge">
+                    ● ONLINE
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section
+    class="features-section"
+    id="features"
+>
+
+    <div class="section-heading">
+
+        <span>
+            KEY FEATURES
+        </span>
+
+        <h2>
+            Intelligent tools for
+            <br>
+            lung image analysis
+        </h2>
+
+        <p>
+            Built around a trained ResNet18
+            deep-learning classification model.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                🧠
+            </div>
+
+            <h3>
+                Deep Neural Network
+            </h3>
+
+            <p>
+                ResNet18 transfer-learning architecture
+                analyzes visual patterns within lung images.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                ◈
+            </div>
+
+            <h3>
+                Multi-Class Classification
+            </h3>
+
+            <p>
+                The system distinguishes between
+                Benign, Malignant, and Normal cases.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Fast Processing
+            </h3>
+
+            <p>
+                Upload an image and receive the
+                model prediction within seconds.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Visual Analytics
+            </h3>
+
+            <p>
+                Explore classification metrics,
+                confusion matrix and model performance.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                🔐
+            </div>
+
+            <h3>
+                Secure Accounts
+            </h3>
+
+            <p>
+                User authentication keeps prediction
+                history associated with individual accounts.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                🗂
+            </div>
+
+            <h3>
+                Prediction History
+            </h3>
+
+            <p>
+                Review previous image analyses and
+                their confidence scores.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<section
+    class="workflow-section"
+    id="workflow"
+>
+
+    <div class="section-heading center">
+
+        <span>
+            HOW IT WORKS
+        </span>
+
+        <h2>
+            From image to prediction
+        </h2>
+
+        <p>
+            A simple four-step AI-assisted workflow.
+        </p>
+
+    </div>
+
+
+    <div class="workflow-grid">
+
+        <div class="workflow-step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Upload
+            </h3>
+
+            <p>
+                Select a lung image from your device.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-line"></div>
+
+
+        <div class="workflow-step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Preprocess
+            </h3>
+
+            <p>
+                The image is resized and normalized
+                for the trained model.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-line"></div>
+
+
+        <div class="workflow-step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Analyze
+            </h3>
+
+            <p>
+                ResNet18 processes the image and
+                calculates class probabilities.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-line"></div>
+
+
+        <div class="workflow-step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <h3>
+                Result
+            </h3>
+
+            <p>
+                View the predicted category and
+                confidence distribution.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="cta-section">
+
+    <div>
+
+        <span>
+            READY TO ANALYZE?
+        </span>
+
+        <h2>
+            Experience AI-powered
+            lung image classification.
+        </h2>
+
+        <p>
+            Upload an image and explore the model's prediction.
+        </p>
+
+    </div>
+
+    <a
+        href="{{ url_for('login') }}"
+        class="primary-button light-button"
+    >
+        Open LungCare AI
+        →
+    </a>
+
+</section>
+
+
+<footer class="landing-footer">
+
+    <div>
+        🫁 <strong>LungCare AI</strong>
+    </div>
+
+    <p>
+        AI-assisted lung image classification
+        for educational and research purposes.
+    </p>
+
+    <span>
+        © 2026 LungCare AI
+    </span>
+
+</footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction History | LungCare AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="dashboard-body">
+
+<div class="dashboard-shell">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a href="{{ url_for('dashboard') }}"
+           class="sidebar-brand">
+
+            <span class="sidebar-logo">
+                🫁
+            </span>
+
+            <span>
+
+                <strong>
+                    LungCare
+                </strong>
+
+                <small>
+                    AI ANALYTICS
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                WORKSPACE
+            </span>
+
+
+            <a href="{{ url_for('dashboard') }}"
+               class="side-link">
+
+                <span>⌂</span>
+                Dashboard
+
+            </a>
+
+
+            <a href="{{ url_for('dashboard') }}#analyze"
+               class="side-link">
+
+                <span>⌕</span>
+                Analyze Scan
+
+            </a>
+
+
+            <a href="{{ url_for('history') }}"
+               class="side-link active">
+
+                <span>◷</span>
+                Prediction History
+
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                INSIGHTS
+            </span>
+
+
+            <a href="{{ url_for('performance') }}"
+               class="side-link">
+
+                <span>◈</span>
+                Model Performance
+
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="model-online">
+
+            <span class="online-dot"></span>
+
+            <div>
+
+                <strong>
+                    Model Online
+                </strong>
+
+                <small>
+                    ResNet18 • 3 classes
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a href="{{ url_for('logout') }}"
+           class="logout-link">
+
+            ⇥ Sign Out
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="topbar-kicker">
+                    LUNGCARE AI
+                </span>
+
+                <h1>
+                    Prediction History
+                </h1>
+
+            </div>
+
+
+            <a href="{{ url_for('dashboard') }}"
+               class="analyze-button small-button">
+
+                + New Analysis
+
+            </a>
+
+        </header>
+
+
+
+        <section class="page-intro">
+
+            <span>
+                ANALYSIS RECORDS
+            </span>
+
+            <h2>
+                Your prediction history
+            </h2>
+
+            <p>
+                Review previously analyzed images
+                and their model confidence.
+            </p>
+
+        </section>
+
+
+
+        {% if predictions %}
+
+
+        <section class="history-card">
+
+
+            <div class="history-head">
+
+                <span>
+                    IMAGE
+                </span>
+
+                <span>
+                    CLASSIFICATION
+                </span>
+
+                <span>
+                    CONFIDENCE
+                </span>
+
+                <span>
+                    DATE
+                </span>
+
+            </div>
+
+
+
+            {% for prediction in predictions %}
+
+
+            <div class="history-row">
+
+
+                <!-- IMAGE -->
+
+                <div class="history-file">
+
+                    <div class="history-thumb">
+                        🫁
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ prediction.image_filename }}
+                        </strong>
+
+                        <span>
+                            Lung image
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CLASSIFICATION -->
+
+                <div>
+
+                    <span class="history-badge">
+
+                        {% if prediction.prediction == "Bengin cases" %}
+
+                            Benign
+
+                        {% elif prediction.prediction == "Malignant cases" %}
+
+                            Malignant
+
+                        {% else %}
+
+                            Normal
+
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- CONFIDENCE -->
+
+                <div class="history-confidence">
+
+                    <strong>
+                        {{ "%.2f"|format(prediction.confidence) }}%
+                    </strong>
+
+
+                    <div class="mini-progress">
+
+                        <span
+                        
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="history-date">
+
+                    {{ prediction.created_at }}
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </section>
+
+
+        {% else %}
+
+
+        <!-- EMPTY HISTORY -->
+
+        <section class="empty-card large-empty">
+
+            <div>
+                ◷
+            </div>
+
+            <h2>
+                No prediction history
+            </h2>
+
+            <p>
+                Your analyzed images will appear here.
+            </p>
+
+
+            <a href="{{ url_for('dashboard') }}"
+               class="analyze-button">
+
+                Start Your First Analysis →
+
+            </a>
+
+        </section>
+
+
+        {% endif %}
+
+
+
+        <div class="medical-disclaimer">
+
+            <strong>
+                Privacy:
+            </strong>
+
+            Prediction history shown here belongs only
+            to the currently authenticated user.
+
+        </div>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

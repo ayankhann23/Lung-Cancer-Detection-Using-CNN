@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard | LungCare AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-shell">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="sidebar-brand"
+        >
+
+            <span class="sidebar-logo">
+                🫁
+            </span>
+
+            <span>
+
+                <strong>
+                    LungCare
+                </strong>
+
+                <small>
+                    AI ANALYTICS
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                WORKSPACE
+            </span>
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="side-link active"
+            >
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a
+                href="#analyze"
+                class="side-link"
+            >
+                <span>⌕</span>
+                Analyze Scan
+            </a>
+
+            <a
+                href="{{ url_for('history') }}"
+                class="side-link"
+            >
+                <span>◷</span>
+                Prediction History
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-group">
+
+            <span class="sidebar-label">
+                INSIGHTS
+            </span>
+
+            <a
+                href="{{ url_for('performance') }}"
+                class="side-link"
+            >
+                <span>◈</span>
+                Model Performance
+            </a>
+
+            <a
+                href="#how-ai-works"
+                class="side-link"
+            >
+                <span>✦</span>
+                How AI Works
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="model-online">
+
+            <span class="online-dot"></span>
+
+            <div>
+
+                <strong>
+                    Model Online
+                </strong>
+
+                <small>
+                    ResNet18 • 3 classes
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout-link"
+        >
+            ⇥
+            Sign Out
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="topbar-kicker">
+                    LUNGCARE AI
+                </span>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <div class="user-avatar">
+                    {{ username[0]|upper }}
+                </div>
+
+                <div>
+
+                    <strong>
+                        {{ username }}
+                    </strong>
+
+                    <span>
+                        Research User
+                    </span>
+
+                </div>
+
+                <a
+                    href="{{ url_for('logout') }}"
+                    class="top-logout"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- HERO -->
+
+        <section class="dashboard-hero">
+
+            <div>
+
+                <span class="hero-small">
+                    AI-POWERED LUNG ANALYSIS
+                </span>
+
+                <h2>
+                    Welcome back,
+                    {{ username }}.
+                </h2>
+
+                <p>
+                    Analyze lung images and explore
+                    your classification results.
+                </p>
+
+            </div>
+
+            <div class="hero-model">
+
+                <span class="online-dot"></span>
+
+                <div>
+                    <strong>
+                        ResNet18
+                    </strong>
+
+                    <small>
+                        Classification Model
+                    </small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    ◎
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Analyses
+                    </span>
+
+                    <strong>
+                        {{ total }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Benign Results
+                    </span>
+
+                    <strong>
+                        {{ benign }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon red">
+                    !
+                </div>
+
+                <div>
+
+                    <span>
+                        Malignant Results
+                    </span>
+
+                    <strong>
+                        {{ malignant }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon cyan">
+                    ◉
+                </div>
+
+                <div>
+
+                    <span>
+                        Normal Results
+                    </span>
+
+                    <strong>
+                        {{ normal }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANALYSIS -->
+
+        <section
+            class="analysis-section"
+            id="analyze"
+        >
+
+            <div class="section-title">
+
+                <div>
+
+                    <span>
+                        IMAGE ANALYSIS
+                    </span>
+
+                    <h2>
+                        Upload a lung image
+                    </h2>
+
+                </div>
+
+                <div class="secure-pill">
+                    🔒 Secure Processing
+                </div>
+
+            </div>
+
+
+            <div class="analysis-card">
+
+                <form
+                    id="uploadForm"
+                    method="POST"
+                    action="{{ url_for('predict') }}"
+                    enctype="multipart/form-data"
+                >
+
+                    <div
+                        class="upload-zone"
+                        id="uploadZone"
+                    >
+
+                        <input
+                            type="file"
+                            name="image"
+                            id="image"
+                            accept=".jpg,.jpeg,.png,.bmp"
+                            hidden
+                            required
+                        >
+
+                        <div
+                            class="upload-placeholder"
+                            id="uploadPlaceholder"
+                        >
+
+                            <div class="upload-icon">
+                                ↑
+                            </div>
+
+                            <h3>
+                                Drop your lung image here
+                            </h3>
+
+                            <p>
+                                or click to browse from your device
+                            </p>
+
+                            <span>
+                                JPG • JPEG • PNG • BMP
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="preview-container"
+                            id="previewContainer"
+                        >
+
+                            <img
+                                id="imagePreview"
+                                alt="Selected lung image"
+                            >
+
+                            <div class="preview-info">
+
+                                <strong id="fileName">
+                                    image
+                                </strong>
+
+                                <span>
+                                    Image ready for analysis
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="analysis-actions">
+
+                        <div class="preprocess-info">
+
+                            <span class="check">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Automatic preprocessing
+                                </strong>
+
+                                <small>
+                                    Resize 224×224 • Normalize • ResNet18
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="analyze-button"
+                            id="analyzeButton"
+                        >
+                            Analyze Image
+                            <span>→</span>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT HISTORY -->
+
+        <section class="recent-section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span>
+                        RECENT ACTIVITY
+                    </span>
+
+                    <h2>
+                        Latest predictions
+                    </h2>
+
+                </div>
+
+                <a
+                    href="{{ url_for('history') }}"
+                    class="view-all"
+                >
+                    View all →
+                </a>
+
+            </div>
+
+
+            {% if recent_predictions %}
+
+            <div class="recent-table">
+
+                {% for item in recent_predictions %}
+
+                <div class="recent-row">
+
+                    <div class="recent-image">
+                        🫁
+                    </div>
+
+                    <div class="recent-file">
+
+                        <strong>
+                            {{ item.image_filename }}
+                        </strong>
+
+                        <span>
+                            {{ item.created_at }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="recent-result
+                        {% if item.prediction == 'Malignant cases' %}
+                            danger
+                        {% elif item.prediction == 'Bengin cases' %}
+                            safe
+                        {% else %}
+                            normal
+                        {% endif %}
+                    ">
+
+                        <span class="result-dot"></span>
+
+                        {% if item.prediction == 'Bengin cases' %}
+                            Benign
+                        {% elif item.prediction == 'Malignant cases' %}
+                            Malignant
+                        {% else %}
+                            Normal
+                        {% endif %}
+
+                    </div>
+
+
+                    <strong class="recent-confidence">
+                        {{ "%.2f"|format(item.confidence) }}%
+                    </strong>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-card">
+
+                <div>
+                    🫁
+                </div>
+
+                <h3>
+                    No predictions yet
+                </h3>
+
+                <p>
+                    Upload your first lung image above
+                    to start analyzing.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- HOW AI WORKS -->
+
+        <section
+            class="how-section"
+            id="how-ai-works"
+        >
+
+            <div class="section-title">
+
+                <div>
+
+                    <span>
+                        HOW IT WORKS
+                    </span>
+
+                    <h2>
+                        From image to AI result
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="how-grid">
+
+                <div class="how-card">
+
+                    <div class="how-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Image Input
+                    </h3>
+
+                    <p>
+                        A lung image is uploaded
+                        through the secure dashboard.
+                    </p>
+
+                </div>
+
+
+                <div class="how-card">
+
+                    <div class="how-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Preprocessing
+                    </h3>
+
+                    <p>
+                        The image is resized to
+                        224×224 and normalized.
+                    </p>
+
+                </div>
+
+
+                <div class="how-card">
+
+                    <div class="how-number">
+                        03
+                    </div>
+
+                    <h3>
+                        ResNet18
+                    </h3>
+
+                    <p>
+                        The trained deep-learning
+                        model analyzes the image.
+                    </p>
+
+                </div>
+
+
+                <div class="how-card">
+
+                    <div class="how-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Classification
+                    </h3>
+
+                    <p>
+                        The system returns the predicted
+                        class and probability distribution.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+
+            <strong>
+                🫁 LungCare AI
+            </strong>
+
+            <span>
+                AI-assisted research & educational system
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+</html>

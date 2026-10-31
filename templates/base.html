@@ -1,0 +1,273 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        LungCare AI
+        {% endblock %}
+    </title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    {% if session.get("user_id") %}
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                <span>✚</span>
+            </div>
+
+            <div>
+                <div class="brand-name">
+                    LungCare
+                </div>
+
+                <div class="brand-subtitle">
+                    AI ANALYSIS
+                </div>
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="nav-item
+                {% if request.endpoint == 'dashboard' %}
+                active
+                {% endif %}"
+            >
+
+                <span class="nav-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('analyze') }}"
+                class="nav-item
+                {% if request.endpoint == 'analyze' %}
+                active
+                {% endif %}"
+            >
+
+                <span class="nav-icon">◉</span>
+
+                <span>New Analysis</span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('history') }}"
+                class="nav-item
+                {% if request.endpoint == 'history' %}
+                active
+                {% endif %}"
+            >
+
+                <span class="nav-icon">▤</span>
+
+                <span>History</span>
+
+            </a>
+
+
+            <div class="nav-divider"></div>
+
+
+            <a
+                href="{{ url_for('profile') }}"
+                class="nav-item
+                {% if request.endpoint == 'profile' %}
+                active
+                {% endif %}"
+            >
+
+                <span class="nav-icon">◎</span>
+
+                <span>Profile</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="model-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        AI Model Online
+                    </strong>
+
+                    <small>
+                        ResNet18
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="logout-link"
+            >
+
+                <span>↪</span>
+
+                Sign out
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    {% endif %}
+
+
+    <main
+        class="
+        {% if session.get('user_id') %}
+        main-content
+        {% else %}
+        auth-main
+        {% endif %}
+        "
+    >
+
+        {% if session.get("user_id") %}
+
+        <header class="topbar">
+
+            <div class="mobile-brand">
+                LungCare AI
+            </div>
+
+            <div class="topbar-spacer"></div>
+
+            <div class="user-menu">
+
+                <div class="user-avatar">
+                    {{ session["username"][0]|upper }}
+                </div>
+
+                <div class="user-info">
+
+                    <span>
+                        {{ session["username"] }}
+                    </span>
+
+                    <small>
+                        Member
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        {% endif %}
+
+
+        {% with messages = get_flashed_messages(
+            with_categories=true
+        ) %}
+
+            {% if messages %}
+
+                <div class="flash-container">
+
+                    {% for category, message in messages %}
+
+                    <div
+                        class="flash-message {{ category }}"
+                    >
+
+                        <span>
+                            {% if category == "success" %}
+                            ✓
+                            {% else %}
+                            !
+                            {% endif %}
+                        </span>
+
+                        {{ message }}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='js/app.js') }}"
+></script>
+
+</body>
+
+</html>
+```
